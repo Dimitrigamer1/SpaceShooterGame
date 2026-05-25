@@ -52,7 +52,7 @@ SpaceShooter/
 
 ▶️ How to Run
 Clone the repository:
-git clone https://github.com/your-username/space-shooter.git
+git clone https://github.com/Dimitrigamer1/space-shooter.git
 Open the project folder:
 cd space-shooter
 Run the game:
