@@ -1,5 +1,8 @@
 # SpaceShooterGame
 
+<img width="1396" height="1028" alt="image" src="https://github.com/user-attachments/assets/412f93f7-af7f-4b46-a371-3f059905084f" />
+
+
 Space Shooter 🚀
 
 A fast-paced 2D space shooter game built with Python and Pygame.
