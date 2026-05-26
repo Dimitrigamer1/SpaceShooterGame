@@ -56,19 +56,6 @@ Meteor	-10 Health
 🛠 Built With
 Python
 Pygame
-📸 Screenshots
-
-You can add gameplay screenshots here later:
-
-![Gameplay](screenshots/gameplay.png)
-🚀 Future Improvements
-Add shooting mechanics
-Add sound effects and music
-Add difficulty levels
-Add power-ups
-Add main menu
-Save high scores
-👨‍💻 Author
 
 Created by Dimitrigamer1
 
