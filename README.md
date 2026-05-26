@@ -49,7 +49,7 @@ Super Crystal	+10	+20
 Ultra Crystal	+20	+30
 Ultra Super Crystal	+50	+50
 Ultra Max Crystal +75 +75
-Coins +15 + 15
+Coins +15 + 25
 ☄️ Dangers
 Object	Damage
 Enemy Ship	-5 Health
