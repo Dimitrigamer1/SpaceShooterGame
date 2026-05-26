@@ -36,23 +36,6 @@ Install Pygame with:
 
 pip install pygame
 
-📁 Project Structure
-SpaceShooter/
-│
-├── assets/
-│   ├── bg.png
-│   ├── icon.png
-│   ├── shooter rocket.png
-│   ├── shooter enemy.png
-│   ├── meteor for SpaceShooterGame.png
-│   ├── crystal for ssg.png
-│   ├── supercrystal for ssg.png
-│   ├── ultracrystal.png
-│   └── ultrasupercrystal.png
-│
-├── main.py
-└── README.md
-
 ▶️ How to Run
 Clone the repository:
 git clone https://github.com/Dimitrigamer1/SpaceShooterGame.git
