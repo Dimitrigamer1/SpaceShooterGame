@@ -373,7 +373,7 @@ while run:
     if pygame.sprite.spritecollideany(Player, coins):
         coin = pygame.sprite.spritecollideany(Player, coins)
         coin.kill()
-        health += 50
+        health += 25
         coins_update_score()
 
     if health <= 0:
