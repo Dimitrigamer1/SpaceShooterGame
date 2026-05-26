@@ -1,7 +1,6 @@
 # SpaceShooterGame
 
-<img width="1396" height="1028" alt="image" src="https://github.com/user-attachments/assets/412f93f7-af7f-4b46-a371-3f059905084f" />
-
+<img width="1399" height="1030" alt="image" src="https://github.com/user-attachments/assets/e27ed6af-cf07-4476-816f-f1910f4c04ca" />
 
 Space Shooter 🚀
 
