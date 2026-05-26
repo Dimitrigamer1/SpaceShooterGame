@@ -131,6 +131,35 @@ class CrUltraSuperCrystal(pygame.sprite.Sprite):
         if self.rect.right < 0:
             self.kill()
 
+class CrUltraMaxCrystal(pygame.sprite.Sprite):
+    def __init__(self):
+        super(CrUltraMaxCrystal, self).__init__()
+        self.surf = pygame.image.load("assets/ultramaxcrystal.png").convert_alpha()
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.rect = self.surf.get_rect(
+            center = (random.randint(screen_width + 20, screen_width + 100), random.randint(0, screen_height)))
+        self.speed = 3.5
+
+    def update(self):
+        self.rect.move_ip(-self.speed, 0)
+        if self.rect.right < 0:
+            self.kill()
+
+class CrCoin(pygame.sprite.Sprite):
+    def __init__(self):
+        super(CrCoin, self).__init__()
+        self.surf = pygame.image.load("assets/coin for ssg.png").convert_alpha()
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.rect = self.surf.get_rect(
+            center = (random.randint(screen_width + 20, screen_width + 100), random.randint(0, screen_height)))
+        self.speed = 3.5
+
+    def update(self):
+        self.rect.move_ip(-self.speed, 0)
+        if self.rect.right < 0:
+            self.kill()
+
+
 Player = CrPlayer()
 all_s = pygame.sprite.Group()
 all_s.add(Player)
@@ -140,6 +169,8 @@ crystals = pygame.sprite.Group()
 super_crystals = pygame.sprite.Group()
 ultra_crystals = pygame.sprite.Group()
 ultra_super_crystals = pygame.sprite.Group()
+ultra_max_crystals = pygame.sprite.Group()
+coins = pygame.sprite.Group()
 
 AddEnemy = pygame.USEREVENT + 1
 pygame.time.set_timer(AddEnemy, 1200)
@@ -159,11 +190,15 @@ pygame.time.set_timer(AddUltraCrystal, 20000)
 AddUltraSuperCrystal = pygame.USEREVENT + 6
 pygame.time.set_timer(AddUltraSuperCrystal, 60000)
 
+AddUltraMaxCrystal = pygame.USEREVENT + 7
+pygame.time.set_timer(AddUltraMaxCrystal, 300000)
+
+AddCoin = pygame.USEREVENT + 8
+pygame.time.set_timer(AddCoin, 10000)
+
 run = True
 
-health_font = pygame.font.SysFont("Unispace", 70, bold=True)
-
-score_font = pygame.font.SysFont("Unispace", 72, bold=True)
+health_font = pygame.font.SysFont("Unispace", 60, bold=True)
 
 gameOver = pygame.font.SysFont("Unispace", 200, bold=True)
 gameOver_surface = gameOver.render(f"GAME OVER", True, (255, 255, 255))
@@ -171,6 +206,7 @@ gameOver_surface = gameOver.render(f"GAME OVER", True, (255, 255, 255))
 gameOverScore = pygame.font.SysFont("Unispace", 100, bold=True)
 gameOverScore_surface = gameOverScore.render(f"Final Score: {score}", True, (255, 255, 255))
 
+score_font = pygame.font.SysFont("Unispace", 70, bold=True)
 score_surface = score_font.render(f"Score: {score}", True, (255, 255, 255))
 
 def game_over():
@@ -216,6 +252,22 @@ def uscrupdate_score():
 
     score_surface = score_font.render(f"Score: {score}", True, (255, 255, 255))
 
+def umcrupdate_score():
+    global score
+    global score_surface
+
+    score += 75
+
+    score_surface = score_font.render(f"Score: {score}", True, (255, 255, 255))
+
+def coins_update_score():
+    global score
+    global score_surface
+
+    score += 15
+
+    score_surface = score_font.render(f"Score: {score}", True, (255, 255, 255))
+
 while run:
     for event in pygame.event.get():
         if event.type == KEYDOWN:
@@ -257,6 +309,16 @@ while run:
             ultra_super_crystals.add(new_ultra_super_crystal)
             all_s.add(new_ultra_super_crystal)
 
+        elif event.type == AddUltraMaxCrystal:
+            new_ultra_max_crystal = CrUltraMaxCrystal()
+            ultra_max_crystals.add(new_ultra_max_crystal)
+            all_s.add(new_ultra_max_crystal)
+
+        elif event.type == AddCoin:
+            new_coins = CrCoin()
+            coins.add(new_coins)
+            all_s.add(new_coins)
+
     pressed_keys = pygame.key.get_pressed()
     Player.update(pressed_keys)
     enemies.update()
@@ -265,6 +327,8 @@ while run:
     super_crystals.update()
     ultra_crystals.update()
     ultra_super_crystals.update()
+    ultra_max_crystals.update()
+    coins.update()
 
     if pygame.sprite.spritecollideany(Player, enemies):
         en = pygame.sprite.spritecollideany(Player, enemies)
@@ -300,6 +364,18 @@ while run:
         health += 50
         uscrupdate_score()
 
+    if pygame.sprite.spritecollideany(Player, ultra_max_crystals):
+        umcr = pygame.sprite.spritecollideany(Player, ultra_max_crystals)
+        umcr.kill()
+        health += 75
+        umcrupdate_score()
+
+    if pygame.sprite.spritecollideany(Player, coins):
+        coin = pygame.sprite.spritecollideany(Player, coins)
+        coin.kill()
+        health += 50
+        coins_update_score()
+
     if health <= 0:
         game_over()
         run = False
@@ -309,10 +385,10 @@ while run:
         screen.blit(entity.surf, entity.rect)
 
     health_surface = health_font.render(f"HEALTH: {health}", True, (255, 255, 255))
-    screen.blit(health_surface, (1100, 900))
+    screen.blit(health_surface, (1000, 900))
 
     score_surface = score_font.render(f"Score: {score}", True, (255, 255, 255))
-    screen.blit(score_surface, (800, 900))
+    screen.blit(score_surface, (700, 900))
 
     clock.tick(256)
     pygame.display.flip()
